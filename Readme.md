@@ -2,37 +2,35 @@
 
 A modern responsive restaurant website created as a learning project.
 
+## Live Website
+
+https://mittalrishabh048.github.io/food-hub-demo-website/
+
 ## Features
 
 - Responsive Design
-- Mobile Navigation Menu
+- Mobile Navigation
 - Digital Menu
-- Food Gallery
-- Customer Reviews
+- Gallery
+- Reviews
 - Contact Section
-- WhatsApp Integration
 
-## Tech Stack
+## Tech Used
 
 - HTML
 - CSS
 - JavaScript
 
-## Development Approach
+## Website Preview
 
-This project was created using AI-assisted development tools and then tested, reviewed, and run locally using VS Code.
+### Homepage
 
-## Learning Outcomes
+![Homepage](screenshots/homepage.png)
 
-- Website structure
-- Responsive design concepts
-- Project testing
-- Frontend project organization
-- GitHub workflow
+### Menu
 
-## Future Improvements
+![Menu](screenshots/menu.png)
 
-- Real business customization
-- Better animations
-- Improved UI/UX
-- Deployment to public hosting
+### Mobile View
+
+![Mobile View](screenshots/mobile-view.png)
