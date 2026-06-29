@@ -25,12 +25,12 @@ https://mittalrishabh048.github.io/food-hub-demo-website/
 
 ### Homepage
 
-![Homepage](screenshots/homepage.png)
+![Homepage](Screenshots/homepage.png)
 
 ### Menu
 
-![Menu](screenshots/menu.png)
+![Menu](Screenshots/menu.png)
 
 ### Mobile View
 
-![Mobile View](screenshots/mobile-view.png)
+![Mobile View](Screenshots/mobile-view.png)
