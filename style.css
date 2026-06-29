@@ -1,5 +1,5 @@
 /* ==========================================================================
-   RESET & SYSTEM CONFIGURATION
+   1. RESET & INITIAL CONFIGURATION (Lines 1 - 25)
    ========================================================================== */
 * {
     margin: 0;
@@ -15,9 +15,10 @@
     --accent-orange-hover: #e05a00;
     --text-white: #ffffff;
     --text-gray: #a0a0aa;
-    --font-heading: 'Playfair Display', serif;
+    --gold-trim: rgba(212, 175, 55, 0.4);
+    --font-heading: 'Cinzel', serif;
     --font-body: 'Poppins', sans-serif;
-    --transition: all 0.3s ease;
+    --transition-smooth: all 0.5s cubic-bezier(0.25, 1, 0.5, 1);
 }
 
 body {
@@ -29,7 +30,7 @@ body {
 }
 
 /* ==========================================================================
-   LAYOUT & REUSABLE UTILITIES
+   2. REUSABLE UTILITIES & BUTTONS (Lines 26 - 75)
    ========================================================================== */
 .container {
     width: 90%;
@@ -38,7 +39,7 @@ body {
 }
 
 .section {
-    padding: 80px 0;
+    padding: 100px 0;
     background-color: var(--bg-dark);
 }
 
@@ -49,8 +50,8 @@ body {
 .section-title {
     text-align: center;
     font-family: var(--font-heading);
-    font-size: 2.5rem;
-    margin-bottom: 50px;
+    font-size: 2.6rem;
+    margin-bottom: 15px;
     letter-spacing: 1px;
 }
 
@@ -58,39 +59,42 @@ body {
     color: var(--accent-orange);
 }
 
-.text-orange {
-    color: var(--accent-orange);
+.section-subtitle-center {
+    text-align: center;
+    color: var(--text-gray);
+    margin-bottom: 50px;
+    font-size: 1rem;
 }
 
-.grid {
-    display: grid;
-    gap: 30px;
-}
-
+.text-orange { color: var(--accent-orange); }
+.grid { display: grid; gap: 30px; }
 .grid-3 { grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); }
-.grid-4 { grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); }
+.grid-4 { grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); }
 
-/* BUTTONS */
 .btn {
     display: inline-flex;
     align-items: center;
     gap: 8px;
-    padding: 12px 28px;
+    padding: 14px 32px;
     font-weight: 600;
     border-radius: 30px;
     text-decoration: none;
-    transition: var(--transition);
+    transition: var(--transition-smooth);
+    position: relative;
+    z-index: 5;
     cursor: pointer;
 }
 
 .btn-primary {
     background-color: var(--accent-orange);
     color: var(--text-white);
+    box-shadow: 0 4px 15px rgba(255, 107, 8, 0.3);
 }
 
 .btn-primary:hover {
     background-color: var(--accent-orange-hover);
-    transform: translateY(-2px);
+    transform: translateY(-3px);
+    box-shadow: 0 6px 20px rgba(255, 107, 8, 0.5);
 }
 
 .btn-secondary {
@@ -102,20 +106,14 @@ body {
 .btn-secondary:hover {
     background-color: var(--text-white);
     color: var(--bg-dark);
-    transform: translateY(-2px);
+    transform: translateY(-3px);
 }
 
-.btn-whatsapp {
-    background-color: #25d366;
-    color: white;
-}
-.btn-whatsapp:hover {
-    background-color: #20ba5a;
-    transform: translateY(-2px);
-}
+.btn-whatsapp { background-color: #25d366; color: white; }
+.btn-whatsapp:hover { background-color: #20ba5a; transform: translateY(-3px); }
 
 /* ==========================================================================
-   HEADER & NAVIGATION
+   3. HEADER & NAVIGATION LOGIC (Lines 76 - 110)
    ========================================================================== */
 .header {
     position: fixed;
@@ -123,10 +121,10 @@ body {
     left: 0;
     width: 100%;
     background-color: rgba(15, 15, 17, 0.95);
-    backdrop-filter: blur(10px);
+    backdrop-filter: blur(15px);
     z-index: 1000;
     border-bottom: 1px solid rgba(255, 255, 255, 0.05);
-    transition: var(--transition);
+    transition: var(--transition-smooth);
 }
 
 .navbar {
@@ -144,47 +142,17 @@ body {
     font-weight: 700;
     color: var(--text-white);
     text-decoration: none;
-    letter-spacing: 1px;
 }
 
-.logo span {
-    color: var(--accent-orange);
-}
-
-.nav-menu {
-    display: flex;
-    list-style: none;
-    gap: 30px;
-}
-
-.nav-link {
-    color: var(--text-gray);
-    text-decoration: none;
-    font-weight: 500;
-    font-size: 0.95rem;
-    transition: var(--transition);
-}
-
-.nav-link:hover, .nav-link.active {
-    color: var(--accent-orange);
-}
-
-.hamburger {
-    display: none;
-    cursor: pointer;
-}
-
-.bar {
-    display: block;
-    width: 25px;
-    height: 3px;
-    margin: 5px auto;
-    transition: var(--transition);
-    background-color: var(--text-white);
-}
+.logo span { color: var(--accent-orange); }
+.nav-menu { display: flex; list-style: none; gap: 30px; }
+.nav-link { color: var(--text-gray); text-decoration: none; font-weight: 500; transition: var(--transition-smooth); }
+.nav-link:hover, .nav-link.active { color: var(--accent-orange); }
+.hamburger { display: none; cursor: pointer; }
+.bar { display: block; width: 25px; height: 3px; margin: 5px auto; transition: var(--transition-smooth); background-color: var(--text-white); }
 
 /* ==========================================================================
-   HERO SECTION
+   4. HERO SELECTION INTERFACE (Lines 111 - 130)
    ========================================================================== */
 .hero {
     height: 100vh;
@@ -200,130 +168,126 @@ body {
 
 .hero-overlay {
     position: absolute;
-    top:0; left:0; width:100%; height:100%;
-    background: linear-gradient(to bottom, rgba(15,15,17,0.7), rgba(15,15,17,0.95));
+    top: 0; left: 0; width: 100%; height: 100%;
+    background: linear-gradient(to bottom, rgba(15,15,17,0.6), rgba(15,15,17,0.95));
 }
 
-.hero-content {
-    position: relative;
-    z-index: 1;
-    padding: 0 20px;
-}
-
-.hero-title {
-    font-family: var(--font-heading);
-    font-size: 5rem;
-    font-weight: 700;
-    letter-spacing: 4px;
-    margin-bottom: 10px;
-    animation: fadeInDown 1s ease;
-}
-
-.hero-subtitle {
-    font-size: 1.3rem;
-    color: var(--text-gray);
-    margin-bottom: 40px;
-    letter-spacing: 2px;
-    animation: fadeInUp 1s ease 0.2s backwards;
-}
-
-.hero-cta {
-    display: flex;
-    justify-content: center;
-    gap: 20px;
-    animation: fadeInUp 1s ease 0.4s backwards;
-}
+.hero-content { position: relative; z-index: 1; }
+.hero-title { font-family: var(--font-heading); font-size: 5rem; letter-spacing: 4px; margin-bottom: 10px; }
+.hero-subtitle { font-size: 1.3rem; color: var(--text-gray); margin-bottom: 40px; letter-spacing: 2px; }
+.hero-cta { display: flex; justify-content: center; gap: 20px; }
 
 /* ==========================================================================
-   FEATURED ITEMS (CARDS)
+   5. INTERACTIVE FEATURED SELECTION CARDS (Lines 131 - 156)
    ========================================================================== */
-.food-card {
+.interactive-food-card {
     background-color: var(--bg-card);
     border-radius: 15px;
-    overflow: hidden;
+    padding: 20px;
+    text-align: center;
     box-shadow: 0 10px 30px rgba(0,0,0,0.3);
-    transition: var(--transition);
+    perspective: 1000px;
+    transform-style: preserve-3d;
+    transition: var(--transition-smooth);
+    cursor: pointer;
 }
 
-.food-card:hover {
-    transform: translateY(-10px);
-    box-shadow: 0 15px 35px rgba(255, 107, 8, 0.15);
+.food-image-container {
+    width: 140px;
+    height: 140px;
+    margin: 0 auto 20px;
+    transform-style: preserve-3d;
+    transform: translateZ(40px);
+    transition: var(--transition-smooth);
 }
 
-.card-img {
-    height: 220px;
-    background-size: cover;
-    background-position: center;
-    transition: var(--transition);
+.premium-food-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 50%;
+    border: 4px solid rgba(255, 255, 255, 0.08);
+    filter: drop-shadow(0 10px 10px rgba(0,0,0,0.4));
+    transition: var(--transition-smooth);
 }
 
-.food-card:hover .card-img {
-    transform: scale(1.05);
-}
+.card-details-layer { transform: translateZ(20px); transition: var(--transition-smooth); }
+.card-details-layer h3 { font-size: 1.25rem; margin-bottom: 5px; color: var(--text-white); }
+.card-details-layer p { color: var(--text-gray); font-size: 0.85rem; line-height: 1.4; }
 
-.card-body {
-    padding: 25px;
-    position: relative;
-}
-
-.card-body h3 {
-    font-size: 1.3rem;
-    margin-bottom: 10px;
-}
-
-.price {
-    display: inline-block;
-    color: var(--accent-orange);
-    font-weight: 700;
-    font-size: 1.2rem;
-    margin-bottom: 10px;
-}
-
-.card-body p {
-    color: var(--text-gray);
-    font-size: 0.9rem;
-}
+.interactive-food-card:hover { background-color: #1f1f25; box-shadow: 0 15px 35px rgba(255, 107, 8, 0.15); }
+.interactive-food-card:hover .food-image-container { transform: translateZ(80px) scale(1.1); }
+.interactive-food-card:hover .premium-food-img { filter: drop-shadow(0 20px 15px rgba(0,0,0,0.6)); }
+.interactive-food-card.mobile-active { background-color: #1f1f25; box-shadow: 0 15px 35px rgba(255, 107, 8, 0.2) !important; }
+.interactive-food-card.mobile-active .food-image-container { transform: translateZ(70px) scale(1.08) !important; }
 
 /* ==========================================================================
-   WHY CHOOSE US
+   6. WHY CHOOSE US BRAND BENCHMARKS (Lines 157 - 165)
    ========================================================================== */
 .feature-card {
     background-color: var(--bg-card);
     padding: 40px 30px;
     text-align: center;
     border-radius: 15px;
-    border: 1px solid rgba(255, 255, 255, 0.03);
-    transition: var(--transition);
+    transition: var(--transition-smooth);
 }
-
-.feature-card:hover {
-    background-color: #1f1f24;
-    border-color: rgba(255, 107, 8, 0.3);
-    transform: translateY(-5px);
-}
-
-.feature-icon {
-    font-size: 2.5rem;
-    color: var(--accent-orange);
-    margin-bottom: 20px;
-}
-
-.feature-card h3 {
-    margin-bottom: 15px;
-    font-size: 1.25rem;
-}
-
-.feature-card p {
-    color: var(--text-gray);
-    font-size: 0.9rem;
-}
+.feature-card:hover { transform: translateY(-5px); background-color: #1f1f24; }
+.feature-icon { font-size: 2.5rem; color: var(--accent-orange); margin-bottom: 20px; }
 
 /* ==========================================================================
-   PROMOTIONAL BANNER
+   7. CINEMATIC 3D INTERACTIVE DIGITAL BOARD LAYERS (Lines 166 - 210)
+   ========================================================================== */
+.cinematic-section {
+    background: radial-gradient(circle at center, #121217 0%, #050507 100%);
+    perspective: 2000px;
+}
+
+.menu-board-perspective { width: 100%; max-width: 950px; margin: 0 auto; }
+.cinematic-board {
+    background: #fcf9f2; color: #1c1a17; border-radius: 6px; padding: 50px 40px;
+    box-shadow: 0 40px 80px rgba(0, 0, 0, 0.7), 0 0 50px rgba(0, 0, 0, 0.05) inset;
+    border: 16px solid #1a1916; position: relative; transform-style: preserve-3d;
+    will-change: transform; transition: transform 0.2s cubic-bezier(0.25, 1, 0.5, 1);
+}
+
+.corner-accent { position: absolute; width: 24px; height: 24px; border: 2px solid #c5a059; }
+.top-left { top: 12px; left: 12px; border-right: none; border-bottom: none; }
+.top-right { top: 12px; right: 12px; border-left: none; border-bottom: none; }
+.bottom-left { bottom: 12px; left: 12px; border-right: none; border-top: none; }
+.bottom-right { bottom: 12px; right: 12px; border-left: none; border-top: none; }
+
+.board-header { text-align: center; margin-bottom: 40px; transform: translateZ(40px); }
+.board-brand { font-family: var(--font-heading); font-size: 1.4rem; font-weight: 700; letter-spacing: 5px; color: #2e2a22; }
+.board-divider { width: 160px; height: 1px; background: #c5a059; margin: 12px auto 0; }
+.board-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(380px, 1fr)); gap: 50px 40px; }
+
+.cinematic-card { display: flex; align-items: center; gap: 25px; padding: 15px; border-radius: 8px; transform-style: preserve-3d; transition: var(--transition-smooth); cursor: pointer; }
+.food-3d-layer { width: 130px; height: 130px; position: relative; transform-style: preserve-3d; transform: translateZ(90px); transition: var(--transition-smooth); flex-shrink: 0; }
+.food-isolated-img { width: 100%; height: 100%; object-fit: cover; border-radius: 50%; border: 4px solid #fff; filter: drop-shadow(0 15px 12px rgba(0, 0, 0, 0.28)); }
+
+.card-info-layer { transform: translateZ(30px); transition: var(--transition-smooth); }
+.food-title { font-size: 1.15rem; font-weight: 600; color: #111111; }
+.price-tag { font-size: 1.1rem; font-weight: 600; color: #222222; margin: 2px 0 6px; }
+.food-desc { font-size: 0.8rem; color: #6a6a6a; line-height: 1.4; }
+
+.cinematic-card:hover { background: rgba(0, 0, 0, 0.02); }
+.cinematic-card:hover .food-3d-layer { transform: translateZ(140px) scale(1.15) rotate(4deg); }
+.cinematic-card:hover .food-isolated-img { filter: drop-shadow(0 25px 18px rgba(0, 0, 0, 0.4)); }
+.cinematic-card:hover .card-info-layer { transform: translateZ(60px); }
+
+.cinematic-card.mobile-active { background: rgba(0, 0, 0, 0.04); }
+.cinematic-card.mobile-active .food-3d-layer { transform: translateZ(125px) scale(1.1) rotate(3deg) !important; }
+.cinematic-card.mobile-active .food-isolated-img { filter: drop-shadow(0 22px 16px rgba(0, 0, 0, 0.35)) !important; }
+.cinematic-card.mobile-active .card-info-layer { transform: translateZ(50px) !important; }
+
+.board-footer { text-align: center; margin-top: 50px; font-family: var(--font-heading); font-size: 0.85rem; color: #9e9581; letter-spacing: 3px; transform: translateZ(20px); }
+
+/* ==========================================================================
+   8. SPECIAL PROMOTIONAL BANNER - VISIBILITY FIXED (Lines 211 - 240)
    ========================================================================== */
 .promo-banner {
     position: relative;
-    padding: 100px 0;
+    padding: 120px 0;
     background-image: url('https://images.unsplash.com/photo-1544025162-d76694265947?auto=format&fit=crop&w=1500&q=80');
     background-size: cover;
     background-position: center;
@@ -331,280 +295,81 @@ body {
     text-align: center;
 }
 
-.promo-overlay {
-    position: absolute;
-    top:0; left:0; width:100%; height:100%;
-    background: rgba(15, 15, 17, 0.85);
+.promo-overlay { 
+    position: absolute; top: 0; left: 0; width: 100%; height: 100%; 
+    background: rgba(10, 10, 12, 0.88); /* Deep overlay matrix */
 }
 
-.promo-content {
-    position: relative;
-    z-index: 1;
-    max-width: 700px;
-    margin: 0 auto;
-    padding: 0 20px;
+.promo-content { position: relative; z-index: 1; max-width: 800px; margin: 0 auto; padding: 0 20px; }
+.badge { background-color: var(--accent-orange); color: var(--text-white); padding: 8px 20px; border-radius: 20px; font-size: 0.85rem; font-weight: 600; text-transform: uppercase; letter-spacing: 1px; display: inline-block; margin-bottom: 15px; }
+
+/* High-Contrast White Styling for Legibility */
+.promo-content h2 { 
+    font-family: var(--font-heading); font-size: 3.5rem; color: #ffffff; 
+    margin: 20px 0; letter-spacing: 2px; line-height: 1.2; 
+    text-shadow: 0 4px 15px rgba(0, 0, 0, 0.6); 
 }
 
-.badge {
-    background-color: var(--accent-orange);
-    padding: 6px 16px;
-    border-radius: 20px;
-    font-size: 0.85rem;
-    font-weight: 600;
-    text-transform: uppercase;
-    letter-spacing: 1px;
-}
-
-.promo-content h2 {
-    font-family: var(--font-heading);
-    font-size: 3rem;
-    margin: 20px 0;
-}
-
-.promo-content p {
-    color: var(--text-gray);
-    margin-bottom: 30px;
+/* Light Silver text description fix */
+.promo-content p { 
+    color: #e4e4e7; font-size: 1.1rem; margin-bottom: 40px; 
+    font-weight: 400; text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5); 
 }
 
 /* ==========================================================================
-   DIGITAL MENU
+   9. CONTACT MODULE & LOCATION INTERACTIVE (Lines 241 - 250)
    ========================================================================== */
-.menu-wrapper {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(45%, 1fr));
-    gap: 40px;
-}
-
-.menu-category h3 {
-    font-family: var(--font-heading);
-    font-size: 1.6rem;
-    margin-bottom: 25px;
-    border-bottom: 1px solid rgba(255,255,255,0.1);
-    padding-bottom: 10px;
-}
-
-.menu-item {
-    display: flex;
-    justify-content: space-between;
-    align-items: baseline;
-    margin-bottom: 20px;
-    padding-bottom: 10px;
-    border-bottom: 1px dashed rgba(255,255,255,0.05);
-}
-
-.item-name {
-    font-weight: 600;
-    font-size: 1.1rem;
-}
-
-.item-desc {
-    font-size: 0.85rem;
-    color: var(--text-gray);
-}
-
-.item-price {
-    color: var(--accent-orange);
-    font-weight: 700;
-}
+.contact-wrapper { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 40px; }
+.contact-info h3 { font-size: 1.8rem; margin-bottom: 20px; font-family: var(--font-heading); }
+.contact-info p { margin-bottom: 15px; display: flex; align-items: center; gap: 10px; }
+.contact-actions { margin-top: 30px; display: flex; gap: 15px; flex-wrap: wrap; }
+.map-placeholder { height: 350px; border-radius: 15px; overflow: hidden; }
 
 /* ==========================================================================
-   GALLERY
+   10. BRAND FOOTER BLOCK SYSTEM (Lines 251 - 264)
    ========================================================================== */
-.gallery-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-    gap: 15px;
-}
-
-.gallery-item {
-    height: 250px;
-    background-size: cover;
-    background-position: center;
-    border-radius: 10px;
-    cursor: pointer;
-    transition: var(--transition);
-}
-
-.gallery-item:hover {
-    transform: scale(1.03);
-    filter: brightness(1.1);
-}
+.footer { background-color: #08080a; padding: 60px 0 20px; border-top: 1px solid rgba(255,255,255,0.05); }
+.footer-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 40px; margin-bottom: 40px; }
+.footer-desc { color: var(--text-gray); margin-top: 15px; font-size: 0.9rem; }
+.footer h4 { margin-bottom: 20px; font-size: 1.1rem; }
+.footer-links { list-style: none; }
+.footer-links li { margin-bottom: 10px; }
+.footer-links a { color: var(--text-gray); text-decoration: none; transition: var(--transition-smooth); }
+.footer-links a:hover { color: var(--accent-orange); }
+.social-icons { display: flex; gap: 15px; }
+.social-icons a { color: var(--text-white); background: var(--bg-card); width: 40px; height: 40px; display: flex; justify-content: center; align-items: center; border-radius: 50%; transition: var(--transition-smooth); }
+.social-icons a:hover { background: var(--accent-orange); transform: translateY(-3px); }
+.copyright { text-align: center; padding-top: 20px; border-top: 1px solid rgba(255,255,255,0.05); color: var(--text-gray); font-size: 0.85rem; }
 
 /* ==========================================================================
-   REVIEWS (TESTIMONIALS)
+   11. MOBILE ADAPTIVE PERSPECTIVE MATRIX (Lines 265 - 284)
    ========================================================================== */
-.review-card {
-    background-color: var(--bg-card);
-    padding: 35px;
-    border-radius: 15px;
-    box-shadow: 0 10px 25px rgba(0,0,0,0.2);
-}
-
-.stars {
-    color: #ffb703;
-    margin-bottom: 15px;
-}
-
-.review-card p {
-    font-style: italic;
-    color: #dedede;
-    margin-bottom: 20px;
-}
-
-.review-card h4 {
-    color: var(--accent-orange);
-}
-
-/* ==========================================================================
-   CONTACT, MAP & FOOTER
-   ========================================================================== */
-.contact-wrapper {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-    gap: 40px;
-    align-items: center;
-}
-
-.contact-info h3 {
-    font-size: 1.8rem;
-    margin-bottom: 20px;
-}
-
-.contact-info p {
-    margin-bottom: 15px;
-    display: flex;
-    align-items: center;
-    gap: 10px;
-}
-
-.contact-actions {
-    margin-top: 30px;
-    display: flex;
-    gap: 15px;
-    flex-wrap: wrap;
-}
-
-.map-placeholder {
-    height: 350px;
-    border-radius: 15px;
-    overflow: hidden;
-    border: 2px solid rgba(255, 255, 255, 0.05);
-}
-
-.footer {
-    background-color: #08080a;
-    padding: 60px 0 20px;
-    border-top: 1px solid rgba(255,255,255,0.05);
-}
-
-.footer-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-    gap: 40px;
-    margin-bottom: 40px;
-}
-
-.footer-desc {
-    color: var(--text-gray);
-    margin-top: 15px;
-    font-size: 0.9rem;
-}
-
-.footer h4 {
-    margin-bottom: 20px;
-    font-size: 1.1rem;
-}
-
-.footer-links {
-    list-style: none;
-}
-
-.footer-links li {
-    margin-bottom: 10px;
-}
-
-.footer-links a {
-    color: var(--text-gray);
-    text-decoration: none;
-    transition: var(--transition);
-}
-
-.footer-links a:hover {
-    color: var(--accent-orange);
-}
-
-.social-icons {
-    display: flex;
-    gap: 15px;
-}
-
-.social-icons a {
-    color: var(--text-white);
-    background: var(--bg-card);
-    width: 40px;
-    height: 40px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    border-radius: 50%;
-    transition: var(--transition);
-}
-
-.social-icons a:hover {
-    background: var(--accent-orange);
-    transform: translateY(-3px);
-}
-
-.copyright {
-    text-align: center;
-    padding-top: 20px;
-    border-top: 1px solid rgba(255,255,255,0.05);
-    color: var(--text-gray);
-    font-size: 0.85rem;
-}
-
-/* ==========================================================================
-   ANIMATIONS KEYFRAMES & MEDIA QUERIES
-   ========================================================================== */
-@keyframes fadeInDown {
-    from { opacity: 0; transform: translateY(-30px); }
-    to { opacity: 1; transform: translateY(0); }
-}
-
-@keyframes fadeInUp {
-    from { opacity: 0; transform: translateY(30px); }
-    to { opacity: 1; transform: translateY(0); }
-}
-
-/* MOBILE RESPONSIVE ADAPTATIONS */
 @media (max-width: 992px) {
     .hero-title { font-size: 3.5rem; }
-    .hero-subtitle { font-size: 1.1rem; }
-    .menu-wrapper { grid-template-columns: 1fr; }
+    .cinematic-board { padding: 40px 20px; }
+    .board-grid { grid-template-columns: 1fr; }
+    .promo-content h2 { font-size: 2.5rem; }
 }
 
 @media (max-width: 768px) {
-    .hamburger { display: block; }
+    .hamburger { display: block; z-index: 1001; }
     .hamburger.active .bar:nth-child(2) { opacity: 0; }
     .hamburger.active .bar:nth-child(1) { transform: translateY(8px) rotate(45deg); }
     .hamburger.active .bar:nth-child(3) { transform: translateY(-8px) rotate(-45deg); }
     
     .nav-menu {
-        position: fixed;
-        left: -100%;
-        top: 70px;
-        flex-direction: column;
-        background-color: var(--bg-dark);
-        width: 100%;
-        text-align: center;
-        transition: 0.3s;
-        box-shadow: 0 10px 20px rgba(0,0,0,0.5);
-        padding: 40px 0;
+        position: fixed; left: -100%; top: 0; flex-direction: column; background-color: #0b0b0d;
+        width: 100%; height: 100vh; text-align: center; justify-content: center;
+        transition: 0.4s cubic-bezier(0.25, 1, 0.5, 1); padding: 0; gap: 35px; z-index: 1000;
     }
     
     .nav-menu.active { left: 0; }
-    .nav-item { margin: 16px 0; }
+    .nav-link { font-size: 1.4rem; display: block; width: 100%; }
     .hero-cta { flex-direction: column; align-items: center; }
-    .btn { width: 80%; justify-content: center; }
-    .promo-content h2 { font-size: 2rem; }
+    .btn { width: 85%; justify-content: center; }
+    
+    .interactive-food-card { padding: 25px 15px; }
+    .food-image-container { width: 120px; height: 120px; }
+    .cinematic-board { padding: 45px 15px; transform-style: preserve-3d; }
+    .food-3d-layer { width: 110px; height: 110px; }
 }
